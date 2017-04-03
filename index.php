@@ -17,24 +17,43 @@
                     Page Heading
                     <small>Secondary Text</small>
                 </h1>
+                
+                <?php
+                    $query = "select * from posts";
+                    $posts = mysqli_query($connection, $query);
+                    while($post = mysqli_fetch_assoc($posts)){
+                        $post_nome = $post["post_nome"];
+                        $post_autor = $post["post_autor"];
+                        $post_data = date('d-m-Y', strtotime($post["post_data"]));
+                        $post_imagem = $post['post_imagem'];
+                        $post_conteudo = $post['post_conteudo'];
+                ?>
+
 
                 <!-- First Blog Post -->
                 <h2>
-                    <a href="#">Blog Post Title</a>
+                    <a href="#"><?php echo $post_nome; ?></a>
                 </h2>
+
                 <p class="lead">
-                    by <a href="index.php">Start Bootstrap</a>
+                    by <a href="index.php"><?php echo $post_autor; ?></a>
                 </p>
-                <p><span class="glyphicon glyphicon-time"></span> Posted on August 28, 2013 at 10:00 PM</p>
+
+                <p><span class="glyphicon glyphicon-time"></span> <?php echo $post_data; ?></p>
+
                 <hr>
-                <img class="img-responsive" src="http://placehold.it/900x300" alt="">
+                <img class="img-responsive" src="images/<?php echo $post_imagem; ?>" alt="">
                 <hr>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, veritatis, tempora, necessitatibus inventore nisi quam quia repellat ut tempore laborum possimus eum dicta id animi corrupti debitis ipsum officiis rerum.</p>
+                <p><?php echo $post_conteudo; ?></p>
                 <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
-
                 <hr>
 
+                <?php
+                    }
+                ?>
             </div>
+
+
 
             <?php 
                 include "includes/sidebar.php"
