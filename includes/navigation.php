@@ -16,7 +16,6 @@
                 <ul class="nav navbar-nav">
 
                     <?php 
-                        global $connection;
                         $query = "select * from categorias";
                         $categorias = mysqli_query($connection, $query);
                         while($cat = mysqli_fetch_assoc($categorias))
