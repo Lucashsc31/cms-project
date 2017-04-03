@@ -19,7 +19,7 @@
                 <div class="well">
                     <h4>Blog Categories</h4>
                     <div class="row">
-                        <div class="col-lg-12">
+                        <div class="col-md-12">
                             <ul class="list-unstyled">
 
                                 <?php 
@@ -28,7 +28,7 @@
                                     while($cat = mysqli_fetch_assoc($categorias))
                                         echo "<li><a href='#'>".$cat['cat_nome']."</a></li>";
                                 ?>
-                                
+
                             </ul>
                         </div>
                     </div>
