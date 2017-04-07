@@ -59,7 +59,7 @@
                         <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Comentarios</a>
                     </li>
                     <li>
-                        <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Categorias</a>
+                        <a href="categorias.php"><i class="fa fa-fw fa-wrench"></i> Categorias</a>
                     </li>
                     <li>
                         <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> Perfil</a>
