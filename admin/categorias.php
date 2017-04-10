@@ -1,3 +1,5 @@
+<?php ob_start(); ?>
+
 <?php include "includes/header.php";?>
 
     <div id="wrapper">
@@ -21,12 +23,11 @@
                             //Inserindo Categoria
                             if(isset($_POST['enviar'])){
                                 $categoria = $_POST['cat_nome'];
-                                if(!empty($categoria) or $categoria != " "){
+                                if(!empty($categoria) or $categoria != ""){
                                     $query = "insert into categorias(cat_nome) values('$categoria')";
                                     mysqli_query($connection, $query);
-                                    echo "<script>alert('Cadastro realizado com sucesso!')</script>";
-                                }else if(empty($categoria) or $categoria == " "){
-                                    echo "<script>alert('O campo não pode ser vazio.')</script>";
+                                }else if(empty($categoria) or $categoria == ""){
+                                    echo "<div class='alert alert-danger' role='alert'>O campo não pode ser vazio.</div>";
                                 }
                             }
 
@@ -37,7 +38,7 @@
                                 $id = $_GET['excluir'];
                                 $query = "delete from categorias where cat_id = $id";
                                 mysqli_query($connection, $query);
-                                echo "<script>alert('Categoria excluida com sucesso!')</script>";
+                                header("location:categorias.php");
                             }
                         ?>
 
