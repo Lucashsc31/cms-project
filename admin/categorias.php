@@ -16,9 +16,25 @@
                             Bem vindo,
                             <small>Lucas</small>
                         </h1>
+
+                        <?php
+                            //Inserindo Categoria
+                            if(isset($_POST['enviar'])){
+                                $categoria = $_POST['cat_nome'];
+                                if(!empty($categoria) and $categoria != " "){
+                                    $query = "insert into categorias(cat_nome) values('$categoria')";
+                                    mysqli_query($connection, $query);
+                                    echo "<script>alert('Cadastro realizado sucesso!')</script>";
+                                }else if(empty($categoria) and $categoria == " "){
+                                    echo "<script>alert('O campo não pode ser vazio.')</script>";
+                                }
+                            }
+                        ?>
+
+
                         <div class="row">
                             <div class="col-sm-6">
-                                <form action="" method="">
+                                <form action="categorias.php" method="POST">
 
                                     <div class="form-group">
                                         <label for="cat_nome">Adicionar Categoria</label>
