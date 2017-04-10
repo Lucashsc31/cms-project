@@ -21,13 +21,23 @@
                             //Inserindo Categoria
                             if(isset($_POST['enviar'])){
                                 $categoria = $_POST['cat_nome'];
-                                if(!empty($categoria) and $categoria != " "){
+                                if(!empty($categoria) or $categoria != " "){
                                     $query = "insert into categorias(cat_nome) values('$categoria')";
                                     mysqli_query($connection, $query);
-                                    echo "<script>alert('Cadastro realizado sucesso!')</script>";
-                                }else if(empty($categoria) and $categoria == " "){
+                                    echo "<script>alert('Cadastro realizado com sucesso!')</script>";
+                                }else if(empty($categoria) or $categoria == " "){
                                     echo "<script>alert('O campo não pode ser vazio.')</script>";
                                 }
+                            }
+
+
+
+                            //Deletar Categoria
+                            if(isset($_GET['excluir'])){
+                                $id = $_GET['excluir'];
+                                $query = "delete from categorias where cat_id = $id";
+                                mysqli_query($connection, $query);
+                                echo "<script>alert('Categoria excluida com sucesso!')</script>";
                             }
                         ?>
 
@@ -53,6 +63,7 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Nome da Categoria</th>
+                                        <th>Excluir</th>
                                     </tr>
                                     
                                     
@@ -67,6 +78,7 @@
                                         <tr>
                                             <td><?php echo $cat_id;?></td>
                                             <td><?php echo $cat_nome;?></td>
+                                            <td><a href="categorias.php?excluir=<?php echo $cat_id ?>">Apagar</a></td>
                                         </tr>
                                     <?php
                                         }
