@@ -31,17 +31,14 @@
                                 }
                             }
 
-
-
                             //Deletar Categoria
                             if(isset($_GET['excluir'])){
-                                $id = $_GET['excluir'];
-                                $query = "delete from categorias where cat_id = $id";
+                                $cat_id = $_GET['excluir'];
+                                $query = "delete from categorias where cat_id = $cat_id";
                                 mysqli_query($connection, $query);
                                 header("location:categorias.php");
                             }
                         ?>
-
 
                         <div class="row">
                             <div class="col-sm-6">
@@ -57,6 +54,47 @@
                                         </div>
                                     </div>
                                 </form>
+
+                                
+                                        <?php
+                                            if(isset($_GET['editar'])){
+                                                $cat_id = $_GET['editar'];
+                                                $query = "select * from categorias where cat_id = $cat_id";
+                                                $categorias = mysqli_query($connection, $query);
+                                                while($cat = mysqli_fetch_assoc($categorias)){
+                                                    $cat_id = $cat["cat_id"];
+                                                    $cat_nome = $cat["cat_nome"];
+                                        ?>
+                                                        <form method="POST">
+                                                            <div class="form-group">
+                                                                <label for="cat_nome">Editar Categoria</label>
+                                                                <div class="input-group">
+                                                                    <input type="text" class="form-control" name="cat_nome" value="<?php if(isset($cat_nome)) echo $cat_nome;?>">
+                                                                    <span class="input-group-btn">
+                                                                        <input type="submit" class="btn btn-primary" name="editar" value="Editar">
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                        <?php
+                                                }
+                                            }
+                                        ?>
+
+                                        <?php
+                                            //Editar Categoria
+                                            if(isset($_POST['editar'])){
+                                                $editar_categoria = $_POST['cat_nome'];
+                                                if(!empty($editar_categoria) or $editar_categoria != ""){
+                                                    $query = "update categorias set cat_nome = '$editar_categoria' where cat_id = $cat_id";
+                                                    mysqli_query($connection, $query);
+                                                    header("location:categorias.php");
+                                                }else if(empty($editar_categoria) or $editar_categoria == ""){
+                                                    echo "<div class='alert alert-danger' role='alert'>O campo não pode ser vazio.</div>";
+                                                }
+                                            }
+                                        ?>
+
                             </div>
 
                             <div class="col-sm-6">
@@ -65,6 +103,7 @@
                                         <th>ID</th>
                                         <th>Nome da Categoria</th>
                                         <th>Excluir</th>
+                                        <th>Editar</th>
                                     </tr>
                                     
                                     
@@ -80,6 +119,7 @@
                                             <td><?php echo $cat_id;?></td>
                                             <td><?php echo $cat_nome;?></td>
                                             <td><a href="categorias.php?excluir=<?php echo $cat_id ?>">Apagar</a></td>
+                                            <td><a href="categorias.php?editar=<?php echo $cat_id ?>">Editar</a></td>
                                         </tr>
                                     <?php
                                         }
